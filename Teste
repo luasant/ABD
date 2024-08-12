@@ -1,0 +1,38 @@
+import org.junit.jupiter.api.*;
+
+public class EmprestimoDAOTest {
+    private EmprestimoDAO emprestimoDAO;
+
+    @BeforeEach
+    public void setUp() {
+        emprestimoDAO = new EmprestimoDAO();
+    }
+
+    @Test
+    public void testSalvar() {
+        Emprestimo emprestimo = new Emprestimo();
+        // Definir propriedades do emprestimo
+        emprestimoDAO.salvar(emprestimo);
+        Assertions.assertNotNull(emprestimoDAO.buscar(emprestimo.getId()));
+    }
+
+    @Test
+    public void testAtualizar() {
+        Emprestimo emprestimo = emprestimoDAO.buscar(1);
+        emprestimo.setDataDevolucao(new Date());
+        emprestimoDAO.atualizar(emprestimo);
+        Assertions.assertEquals(new Date(), emprestimoDAO.buscar(1).getDataDevolucao());
+    }
+
+    @Test
+    public void testDeletar() {
+        Emprestimo emprestimo = emprestimoDAO.buscar(1);
+        emprestimoDAO.deletar(emprestimo);
+        Assertions.assertNull(emprestimoDAO.buscar(1));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        emprestimoDAO.fechar();
+    }
+}
