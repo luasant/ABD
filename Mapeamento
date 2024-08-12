@@ -1,0 +1,39 @@
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+public class Aluno {
+    @Id
+    private int id;
+    private String nome;
+    private String matricula;
+    // Getters and Setters
+}
+
+@Entity
+public class Publicacao {
+    @Id
+    private int id;
+    private String titulo;
+    private String autor;
+    // Getters and Setters
+}
+
+@Entity
+public class Emprestimo {
+    @Id
+    private int id;
+    @Temporal(TemporalType.DATE)
+    private Date dataEmprestimo;
+    @Temporal(TemporalType.DATE)
+    private Date dataDevolucao;
+
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    private Aluno aluno;
+
+    @ManyToOne
+    @JoinColumn(name = "publicacao_id")
+    private Publicacao publicacao;
+    // Getters and Setters
+}
