@@ -1,0 +1,21 @@
+CREATE TABLE Aluno (
+    id INT PRIMARY KEY,
+    nome VARCHAR(255),
+    matricula VARCHAR(50)
+);
+
+CREATE TABLE Publicacao (
+    id INT PRIMARY KEY,
+    titulo VARCHAR(255),
+    autor VARCHAR(255)
+);
+
+CREATE TABLE Emprestimo (
+    id INT PRIMARY KEY,
+    data_emprestimo DATE,
+    data_devolucao DATE,
+    aluno_id INT,
+    publicacao_id INT,
+    FOREIGN KEY (aluno_id) REFERENCES Aluno(id),
+    FOREIGN KEY (publicacao_id) REFERENCES Publicacao(id)
+);
